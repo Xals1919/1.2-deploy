@@ -12,14 +12,14 @@ class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter]
-    search_fields = ['title', 'description',]
-
+    search_fields = ['title', 'description', ]
 
 
 class StockViewSet(ModelViewSet):
     queryset = Stock.objects.all()
     serializer_class = StockSerializer
-    filterset_fields = ['products',]
+    filterset_fields = ['products', ]
+
 
 @api_view(['GET'])
 def some_function(request):
