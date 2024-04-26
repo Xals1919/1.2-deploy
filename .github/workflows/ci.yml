@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-22.04
     env:
       SECRET: ${{ secrets.SECRET }}
-      DEBUG_MODE: ${{ secrets.DEBUG_MODE}}
+      DEBUG: ${{ secrets.DEBUG_MODE}}
       DB_USER: ${{ secrets.DB_USER }}
       DB_PORT: ${{ secrets.DB_PORT }}
       DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
@@ -51,7 +51,7 @@ jobs:
         run: python manage.py test
         env:
           SECRET_KEY: ${{ env.SECRET }}
-          DEBUG: ${{ env.DEBUG_MODE }}
+          DEBUG: ${{ env.DEBUG }}
           ALLOWED_HOSTS: ${{ env.ALLOWED_HOSTS }}
           DB_ENGINE: ${{ env.DB_ENGINE }}
           DB_NAME: ${{ env.DB_NAME }}
