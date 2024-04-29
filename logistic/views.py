@@ -23,4 +23,4 @@ class StockViewSet(ModelViewSet):
 
 @api_view(['GET'])
 def some_function(request):
-    return Response({'message': 'Hello world'})
+    return Response({'message': 'Hello new world'})
