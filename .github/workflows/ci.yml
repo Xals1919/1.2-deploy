@@ -19,7 +19,7 @@ jobs:
       DB_ENGINE: ${{ secrets.DB_ENGINE }}
       ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
     services:
-      postgres_main:
+      pg_main:
         image: postgres:12
         env:
           POSTGRES_DB: ${{ env.DB_NAME }}
@@ -37,9 +37,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Установка python и окружения
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v3
         with:
-          python-version: "3.10"
+          python-version: 3.10
 
       - name: установка библиотек
         run: pip install -r requirements.txt
@@ -60,19 +60,15 @@ jobs:
           DB_HOST: ${{ env.DB_HOST }}
           DB_PORT: ${{ env.DB_PORT }}
 
-      - name: Развертывание
+      - name: Деплой
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            cd /home/viktor/1.2-deploy
-            git pull origin main
-            source env/bin/activate
-            pip install -r requirements.txt
-            python manage.py migrate
-            sudo systemctl restart gunicorn
+          script: expect /home/viktor/1.2-deploy/deploy.exp
+
+
 
 
 
